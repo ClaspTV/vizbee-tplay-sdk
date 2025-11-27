@@ -4,6 +4,10 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>.gitignore</key>
+		<data>
+		sICFUsQLMMM3c09LHPtDTCzoc7I=
+		</data>
 		<key>Assets.car</key>
 		<data>
 		XtQg+XF+w4Cc4XNVmDiKVySnCr0=
@@ -18,7 +22,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		RjLCdL2inQhULroFMFQjQ2kKTbY=
+		uRODazLwxh25ao4DmHdaFlF8nN0=
 		</data>
 		<key>Modules/VizbeeTPlayKit.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -70,11 +74,26 @@
 		</data>
 		<key>build-xcframework.sh</key>
 		<data>
-		mkOR+Cbfif0G2NV6DsL3AjwvS/4=
+		sTSYEnc/aUPHQu/e9Q4nr++6cxM=
+		</data>
+		<key>misc.xml</key>
+		<data>
+		iStGvK9YNoA+mRLCu+qMoDceIWY=
+		</data>
+		<key>workspace.xml</key>
+		<data>
+		a4qKnzpjxsKGbs0gh/PZSm/Ouco=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>.gitignore</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			qeVPxPCLyX2CwEvYb/N9OvhLqe9K2H/Py0ONq2Iuiqo=
+			</data>
+		</dict>
 		<key>Assets.car</key>
 		<dict>
 			<key>hash2</key>
@@ -184,7 +203,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			4tVrUaIyfdBfB3dL+kMjhX/z6/VJ6zTts78kJdvun9Q=
+			D4QKbHKe/8tSCYB1TPXqUAqenDeq7+6f+5VxxthpzQ8=
+			</data>
+		</dict>
+		<key>misc.xml</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			M5oM+doHp29LIDmVeLBvAQAknP7q16pgwNOVEb9OjS8=
+			</data>
+		</dict>
+		<key>workspace.xml</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			RAt8XR73y4gzQsnXNJhMy41qBR7Uj2zryGy/K9P9IFo=
 			</data>
 		</dict>
 	</dict>

@@ -117,6 +117,8 @@ main() {
     export CONFIG_TYPE="$3"
     export VERSION_STRING="$SEMANTIC_VERSION-$BUNDLE_VERSION"
     
+    update_plist_files
+    
     clear_archives
     
     build_framework
