@@ -1,0 +1,551 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.19.9 clang-1700.3.19.1)
+// swift-module-flags: -target arm64-apple-ios16.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name VizbeeTPlayKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+import Combine
+import DeveloperToolsSupport
+import Foundation
+import Swift
+import SwiftUI
+import UIKit
+import VizbeeHomeOSKit
+import VizbeeKit
+@_exported import VizbeeTPlayKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+import os.log
+import os
+public enum VTPAnalyticsEvent {
+  case deviceSelectionDialogShown(devices: [VizbeeHomeOSKit.HomeDevice])
+  case deviceSelectionDialogUpdated(devices: [VizbeeHomeOSKit.HomeDevice])
+  case deviceSelectionDialogDismissed
+  case tvSelected(device: VizbeeHomeOSKit.HomeDevice)
+  case mobileSelected
+  case tvConnecting(device: VizbeeHomeOSKit.HomeDevice)
+  case tvConnected(device: VizbeeHomeOSKit.HomeDevice)
+  case tvConnectionFailed(device: VizbeeHomeOSKit.HomeDevice, error: Swift.String?)
+  case tvDisconnected(device: VizbeeHomeOSKit.HomeDevice, reason: Swift.String?)
+  case videoStateChanged(videoTitle: Swift.String, videoDeepLink: Swift.String, state: VizbeeTPlayKit.VTPAnalyticsEvent.VideoState, position: Swift.Int64, duration: Swift.Int64, error: Swift.String?)
+  public enum VideoState {
+    case started
+    case playing
+    case paused
+    case buffering
+    case loading
+    case ended
+    case stopped
+    case stoppedOnDisconnect
+    case error
+    case unknown
+    public static func == (a: VizbeeTPlayKit.VTPAnalyticsEvent.VideoState, b: VizbeeTPlayKit.VTPAnalyticsEvent.VideoState) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+extension VizbeeTPlayKit.VTPAnalyticsEvent : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+extension VizbeeTPlayKit.VTPAnalyticsEvent.VideoState : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+public protocol VTPAnalyticsListener : AnyObject {
+  func onEvent(_ event: VizbeeTPlayKit.VTPAnalyticsEvent)
+}
+@_hasMissingDesignatedInitializers public class VTPAnalyticsManager {
+  public static func getInstance() -> VizbeeTPlayKit.VTPAnalyticsManager
+  public func addListener(_ listener: any VizbeeTPlayKit.VTPAnalyticsListener)
+  public func removeListener(_ listener: any VizbeeTPlayKit.VTPAnalyticsListener)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class VTPLogger {
+  public enum LogLevel : Swift.Int, Swift.Comparable {
+    case debug
+    case info
+    case warning
+    case error
+    public static func < (lhs: VizbeeTPlayKit.VTPLogger.LogLevel, rhs: VizbeeTPlayKit.VTPLogger.LogLevel) -> Swift.Bool
+    #if compiler(>=5.3) && $NonescapableTypes
+    public init?(rawValue: Swift.Int)
+    #endif
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  public enum Category : Swift.String {
+    case LC
+    case AC
+    case NW
+    case UI
+    case DV
+    case GN
+    #if compiler(>=5.3) && $NonescapableTypes
+    public init?(rawValue: Swift.String)
+    #endif
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public static let shared: VizbeeTPlayKit.VTPLogger
+  public func setLogLevel(_ level: VizbeeTPlayKit.VTPLogger.LogLevel)
+  public func setConsoleLogging(enabled: Swift.Bool)
+  public func setOSLogging(enabled: Swift.Bool)
+  public func log(level: VizbeeTPlayKit.VTPLogger.LogLevel, category: VizbeeTPlayKit.VTPLogger.Category, message: Swift.String, file: Swift.String = #file, function: Swift.String = #function, line: Swift.Int = #line)
+  public func debug(_ message: Swift.String, category: VizbeeTPlayKit.VTPLogger.Category = .GN, file: Swift.String = #file, function: Swift.String = #function, line: Swift.Int = #line)
+  public func info(_ message: Swift.String, category: VizbeeTPlayKit.VTPLogger.Category = .GN, file: Swift.String = #file, function: Swift.String = #function, line: Swift.Int = #line)
+  public func warning(_ message: Swift.String, category: VizbeeTPlayKit.VTPLogger.Category = .GN, file: Swift.String = #file, function: Swift.String = #function, line: Swift.Int = #line)
+  public func error(_ message: Swift.String, category: VizbeeTPlayKit.VTPLogger.Category = .GN, file: Swift.String = #file, function: Swift.String = #function, line: Swift.Int = #line)
+  @objc deinit
+}
+public func DDLogDebug(_ message: Swift.String, file: Swift.String = #file, function: Swift.String = #function, line: Swift.Int = #line)
+public func DDLogInfo(_ message: Swift.String, file: Swift.String = #file, function: Swift.String = #function, line: Swift.Int = #line)
+public func DDLogVerbose(_ message: Swift.String, file: Swift.String = #file, function: Swift.String = #function, line: Swift.Int = #line)
+public func DDLogWarn(_ message: Swift.String, file: Swift.String = #file, function: Swift.String = #function, line: Swift.Int = #line)
+public func DDLogError(_ message: Swift.String, file: Swift.String = #file, function: Swift.String = #function, line: Swift.Int = #line)
+public struct VTPOptions {
+  public var debugMode: Swift.Bool
+  public var supportedApps: [Swift.String : Swift.String]
+  public var uiConfiguration: [Swift.String : Any]
+  public var useSystemTheme: Swift.Bool
+  public init(debugMode: Swift.Bool = false, supportedApps: [Swift.String : Swift.String] = VTPAppMapper.defaultSupportedApps, uiConfiguration: [Swift.String : Any] = VTPStylesConfig.defaultStyleForDarkTheme(), useSystemTheme: Swift.Bool = true)
+}
+public enum VTPStartVideoError : Foundation.LocalizedError {
+  case deviceSelectionCancelled(message: Swift.String = "User dismissed device selection")
+  case deviceConnectionCancelled(message: Swift.String = "Device connection cancelled")
+  case deviceConnectionError(message: Swift.String = "Failed to connect to device", reason: Swift.String)
+  case unknownError(message: Swift.String = "Unknown error")
+  #if compiler(>=5.3) && $NonescapableTypes
+  public var errorDescription: Swift.String? {
+    get
+  }
+  #endif
+}
+public enum VTPStartVideoResult {
+  case success(destination: VizbeeTPlayKit.VTPStartVideoResult.Destination)
+  case failure(error: VizbeeTPlayKit.VTPStartVideoError)
+  public enum Destination {
+    case tv
+    case mobile
+    public static func == (a: VizbeeTPlayKit.VTPStartVideoResult.Destination, b: VizbeeTPlayKit.VTPStartVideoResult.Destination) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+public struct VTPVideoInfo {
+  public var id: Swift.String
+  public let mobileDeepLinkUrl: Swift.String
+  public let tvDeepLinkUrl: Swift.String
+  public let title: Swift.String
+  public let subtitle: Swift.String?
+  public let imageUrl: Swift.String?
+  public let isLive: Swift.Bool
+  public var provider: VizbeeTPlayKit.VTPVideoInfo.Provider?
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(id: Swift.String = "", mobileDeepLinkUrl: Swift.String, tvDeepLinkUrl: Swift.String, title: Swift.String, subtitle: Swift.String? = nil, imageUrl: Swift.String? = nil, isLive: Swift.Bool = false, provider: VizbeeTPlayKit.VTPVideoInfo.Provider? = nil)
+  #endif
+}
+extension VizbeeTPlayKit.VTPVideoInfo {
+  public enum Provider : Swift.String, Swift.CaseIterable {
+    case plex
+    case tbs
+    case tnt
+    #if compiler(>=5.3) && $NonescapableTypes
+    public init?(rawValue: Swift.String)
+    #endif
+    public typealias AllCases = [VizbeeTPlayKit.VTPVideoInfo.Provider]
+    public typealias RawValue = Swift.String
+    nonisolated public static var allCases: [VizbeeTPlayKit.VTPVideoInfo.Provider] {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+}
+public let VTPUIConfigChangeNotification: Foundation.Notification.Name
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers open class VTPUI : ObjectiveC.NSObject {
+  public static let shared: VizbeeTPlayKit.VTPUI
+  public var inputStylesConfig: [Swift.String : Any]? {
+    get
+  }
+  public var finalizedStylesConfig: [Swift.String : Any]? {
+    get
+  }
+  public var isExternalConfigSet: Swift.Bool {
+    get
+  }
+  public var cardsFactory: VizbeeTPlayKit.VTPUICardsFactory? {
+    get
+  }
+  public var styleManager: VizbeeTPlayKit.VTPUIStyler? {
+    get
+  }
+  open func setVizbeeUIWindowLevel(_ windowLevel: UIKit.UIWindow.Level)
+  open func shouldUseVizbeeUIWindow() -> Swift.Bool
+  open func getVizbeeUIWindow() -> VizbeeTPlayKit.VTPUIWindow
+  open func resetVizbeeUIWindow()
+  open func updateConfig(_ stylesConfig: [Swift.String : Any], fromExternalSource isExternalConfig: Swift.Bool)
+  #if compiler(>=5.3) && $NonescapableTypes
+  open func updateConfig(_ stylesConfig: [Swift.String : Any]?)
+  #endif
+  @objc deinit
+}
+@_inheritsConvenienceInitializers open class VTPUICardsFactory : VizbeeTPlayKit.VTPBaseCardFactory {
+  required public init()
+  #if compiler(>=5.3) && $NonescapableTypes
+  override open func create(_ className: Swift.String) -> UIKit.UIViewController?
+  #endif
+  @objc deinit
+}
+open class VTPBaseCardFactory {
+  required public init()
+  #if compiler(>=5.3) && $NonescapableTypes
+  open func create(_ className: Swift.String) -> UIKit.UIViewController?
+  #endif
+  @objc deinit
+}
+@objc @_Concurrency.MainActor @preconcurrency open class VTPUIWindow : UIKit.UIWindow {
+  @_Concurrency.MainActor @preconcurrency public init(level: UIKit.UIWindow.Level)
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  #endif
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency open class VTPBaseLayeredViewController : VizbeeTPlayKit.VTPStyleableViewController {
+  @_Concurrency.MainActor @preconcurrency public var backgroundLayer: VizbeeTPlayKit.VTPBackgroundLayer! {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic open func viewDidLoad()
+  @_Concurrency.MainActor @preconcurrency @objc override open func registerStyleableViews()
+  @_Concurrency.MainActor @preconcurrency public func setBackgroundColor(_ color: UIKit.UIColor)
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  #endif
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc @_Concurrency.MainActor @preconcurrency open class VTPBaseViewController : UIKit.UIViewController {
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic open func viewDidLoad()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic open func viewWillDisappear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic open func viewDidDisappear(_ animated: Swift.Bool)
+  @objc @_Concurrency.MainActor @preconcurrency open func metricCardName() -> Swift.String
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  #endif
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency open class VTPStyleableViewController : VizbeeTPlayKit.VTPBaseViewController, VizbeeTPlayKit.VTPStyleableViewProtocol {
+  @_Concurrency.MainActor @preconcurrency public var styleImpl: VizbeeTPlayKit.VTPStyleableViewImpl {
+    get
+    set
+  }
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic open func viewDidLoad()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency @objc open func registerStyleableView(_ view: UIKit.UIView, withID viewID: Swift.String)
+  @_Concurrency.MainActor @preconcurrency @objc open func registerStyleableView(_ view: UIKit.UIView, withID viewID: Swift.String, withClasses classes: [Swift.String])
+  @_Concurrency.MainActor @preconcurrency @objc open func unregisterStyleableView(byID viewID: Swift.String)
+  @_Concurrency.MainActor @preconcurrency @objc open func setStyleID(_ viewID: Swift.String)
+  @_Concurrency.MainActor @preconcurrency @objc open func setStyleClasses(_ styleClasses: [Swift.String])
+  @_Concurrency.MainActor @preconcurrency @objc open func registerStyleableViews()
+  @_Concurrency.MainActor @preconcurrency @objc open func updateStyleableViews()
+  @_Concurrency.MainActor @preconcurrency @objc open func logStyleableViews()
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  #endif
+  @objc deinit
+}
+@objc public protocol VTPStyleableViewProtocol {
+  @objc func registerStyleableView(_ view: UIKit.UIView, withID viewID: Swift.String)
+  @objc func registerStyleableView(_ view: UIKit.UIView, withID viewID: Swift.String, withClasses styleClasses: [Swift.String])
+  @objc func unregisterStyleableView(byID viewID: Swift.String)
+  @objc func setStyleID(_ styleID: Swift.String)
+  @objc func setStyleClasses(_ styleClasses: [Swift.String])
+  @objc func registerStyleableViews()
+  @objc func updateStyleableViews()
+  @objc func logStyleableViews()
+}
+public class VTPDeviceSelectionCoordinator {
+  public enum Route {
+    case castButtonDeviceSelection
+    case smartPlayDeviceSelection
+    public static func == (a: VizbeeTPlayKit.VTPDeviceSelectionCoordinator.Route, b: VizbeeTPlayKit.VTPDeviceSelectionCoordinator.Route) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public typealias CompletionHandler = (Swift.Result<VizbeeHomeOSKit.HomeDevice?, any Swift.Error>) -> Swift.Void
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(presentingViewController: UIKit.UIViewController?, videoInfo: VizbeeTPlayKit.VTPVideoInfo? = nil, continuation: _Concurrency.CheckedContinuation<VizbeeTPlayKit.VTPStartVideoResult, Swift.Never>? = nil)
+  #endif
+  @objc deinit
+  public func start(navigateTo: VizbeeTPlayKit.VTPDeviceSelectionCoordinator.Route, completion: @escaping VizbeeTPlayKit.VTPDeviceSelectionCoordinator.CompletionHandler)
+}
+extension VizbeeTPlayKit.VTPDeviceSelectionCoordinator.Route : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+@_inheritsConvenienceInitializers @objc public class VTPDeviceSelectionViewControllerFactory : ObjectiveC.NSObject {
+  @objc override dynamic public init()
+  @objc deinit
+}
+public class VTPDeviceSelectionViewModel : VizbeeHomeOSKit.HomeDiscoveryListener {
+  @Combine.Published @_projectedValueProperty($devices) public var devices: [VizbeeHomeOSKit.HomeDevice] {
+    get
+  }
+  public var $devices: Combine.Published<[VizbeeHomeOSKit.HomeDevice]>.Publisher {
+    get
+  }
+  public enum State {
+    case deviceSelected(VizbeeHomeOSKit.HomeDevice)
+  }
+  public enum Action {
+    case selectTVDevice(VizbeeHomeOSKit.HomeDevice)
+    case selectPhoneDevice
+    case dismiss
+  }
+  public var onTVSelected: ((VizbeeHomeOSKit.HomeDevice) -> Swift.Void)?
+  public var onPhoneSelected: (() -> Swift.Void)?
+  public var onDismiss: (() -> Swift.Void)?
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(videoInfo: VizbeeTPlayKit.VTPVideoInfo? = nil)
+  #endif
+  @objc deinit
+  @objc public func onDeviceListUpdate(devices: [VizbeeHomeOSKit.HomeDevice])
+  public func handle(_ action: VizbeeTPlayKit.VTPDeviceSelectionViewModel.Action)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class VTPBackgroundLayer : VizbeeTPlayKit.VTPStyleableCustomView {
+  @_Concurrency.MainActor @preconcurrency final public let rootView: UIKit.UIView
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency public func setColor(_ color: UIKit.UIColor)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency open class VTPStyleableCustomView : UIKit.UIView, VizbeeTPlayKit.VTPStyleableViewProtocol {
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  #endif
+  @_Concurrency.MainActor @preconcurrency open func commonInit()
+  @_Concurrency.MainActor @preconcurrency @objc public func registerStyleableView(_ view: UIKit.UIView, withID viewID: Swift.String)
+  @_Concurrency.MainActor @preconcurrency @objc public func registerStyleableView(_ view: UIKit.UIView, withID viewID: Swift.String, withClasses styleClasses: [Swift.String])
+  @_Concurrency.MainActor @preconcurrency @objc public func unregisterStyleableView(byID viewID: Swift.String)
+  @_Concurrency.MainActor @preconcurrency @objc public func setStyleID(_ styleID: Swift.String)
+  @_Concurrency.MainActor @preconcurrency @objc public func setStyleClasses(_ styleClasses: [Swift.String])
+  @_Concurrency.MainActor @preconcurrency @objc open func registerStyleableViews()
+  @_Concurrency.MainActor @preconcurrency @objc public func updateStyleableViews()
+  @_Concurrency.MainActor @preconcurrency @objc public func logStyleableViews()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic open func didMoveToWindow()
+  @objc deinit
+}
+extension VizbeeTPlayKit.VTPStyleableCustomView {
+  @_Concurrency.MainActor @preconcurrency public func setStyle(id: Swift.String, classes: [Swift.String])
+  @_Concurrency.MainActor @preconcurrency public func applyStyles()
+}
+@objc public class VTPStyleableViewImpl : ObjectiveC.NSObject, VizbeeTPlayKit.VTPStyleableViewProtocol {
+  @objc public init(view: UIKit.UIView)
+  @objc public func registerStyleableView(_ view: UIKit.UIView, withID viewID: Swift.String)
+  @objc public func registerStyleableView(_ view: UIKit.UIView, withID viewID: Swift.String, withClasses styleClasses: [Swift.String])
+  @objc public func unregisterStyleableView(byID viewID: Swift.String)
+  @objc public func setStyleID(_ styleID: Swift.String)
+  @objc public func setStyleClasses(_ styleClasses: [Swift.String])
+  @objc public func registerStyleableViews()
+  @objc public func updateStyleableViews()
+  @objc public func logStyleableViews()
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public static func getID(_ viewID: Swift.String, withStyleID styleID: Swift.String?) -> Swift.String
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public static func getClasses(_ classes: [Swift.String], withStyleClasses styleClasses: [Swift.String]?) -> [Swift.String]
+  #endif
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor public class VTPCastButton : UIKit.UIView {
+  @_Concurrency.MainActor @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor public func barButtonItem() -> UIKit.UIBarButtonItem?
+  #endif
+  @_Concurrency.MainActor public func getVizbeeCastButton() -> VizbeeKit.VZBCastButton
+  @_Concurrency.MainActor @preconcurrency public struct SwiftUIView : SwiftUI.UIViewRepresentable {
+    @_Concurrency.MainActor @preconcurrency public init(size: CoreFoundation.CGSize = CGSize(width: 24, height: 24))
+    @_Concurrency.MainActor @preconcurrency public func makeUIView(context: VizbeeTPlayKit.VTPCastButton.SwiftUIView.Context) -> VizbeeKit.VZBCastButton
+    @_Concurrency.MainActor @preconcurrency public func updateUIView(_ uiView: VizbeeKit.VZBCastButton, context: VizbeeTPlayKit.VTPCastButton.SwiftUIView.Context)
+    @_Concurrency.MainActor @preconcurrency public func makeCoordinator() -> VizbeeTPlayKit.VTPCastButton.SwiftUIView.Coordinator
+    @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class Coordinator : ObjectiveC.NSObject {
+      @objc deinit
+    }
+    public typealias Body = Swift.Never
+    public typealias UIViewType = VizbeeKit.VZBCastButton
+  }
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class VTPUIStackManager : ObjectiveC.NSObject {
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public var presentingCustomerViewController: UIKit.UIViewController? {
+    @objc get
+    @objc set
+  }
+  #endif
+  @objc public var currentlyDisplayedViewController: UIKit.UIViewController?
+  @objc public static let sharedInstance: VizbeeTPlayKit.VTPUIStackManager
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public func showCard(_ viewController: UIKit.UIViewController, animated: Swift.Bool = true, completion: (((any Swift.Error)?) -> Swift.Void)? = nil)
+  #endif
+  @objc public func hideAllCards(_ animated: Swift.Bool)
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public func hideAllCards(_ animated: Swift.Bool, withCompletion completion: (() -> Swift.Void)?)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public func hideAllCards(_ animated: Swift.Bool, withCompletion completion: (() -> Swift.Void)?, andClearPresentingCustomerViewController clearPresentingViewController: Swift.Bool)
+  #endif
+  @objc deinit
+}
+@objc public class VTPBaseStyler : ObjectiveC.NSObject {
+  final public let uiStyleConfig: [Swift.String : Any]
+  final public let uiStyleReader: VizbeeTPlayKit.VTPUIStyleReader
+  required public init(config: [Swift.String : Any])
+  #if compiler(>=5.3) && $NonescapableTypes
+  open func style(_ view: UIKit.UIView, withID viewID: Swift.String?, withClasses styleClasses: [Swift.String])
+  #endif
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class VTPUIStyler : VizbeeTPlayKit.VTPBaseStyler {
+  #if compiler(>=5.3) && $NonescapableTypes
+  override open func style(_ view: UIKit.UIView, withID viewID: Swift.String?, withClasses styleClasses: [Swift.String])
+  #endif
+  @objc deinit
+}
+@objc public protocol VTPStyleableView {
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc optional func applyStyle(withID viewID: Swift.String?, classes: [Swift.String])
+  #endif
+}
+open class VTPAbstractStyleConfig {
+  public init()
+  open func getConfig() -> [Swift.String : Any]
+  @objc deinit
+}
+@_inheritsConvenienceInitializers open class VTPCommonThemeConfig : VizbeeTPlayKit.VTPAbstractStyleConfig {
+  override public init()
+  override open func getConfig() -> [Swift.String : Any]
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class VTPStylesConfig {
+  public static func defaultStyleForNoTheme() -> [Swift.String : Any]
+  public static func defaultStyleForLightTheme() -> [Swift.String : Any]
+  public static func defaultStyleForDarkTheme() -> [Swift.String : Any]
+  @objc deinit
+}
+open class VTPUIStyleFinalizer {
+  public init()
+  open func finalizeStyleConfig(_ styleConfig: [Swift.String : Any]) -> [Swift.String : Any]
+  @objc deinit
+}
+open class VTPUIStyleReader {
+  public init(config: [Swift.String : Any])
+  open func isPropertySet(_ property: Swift.String) -> Swift.Bool
+  open func isPropertySet(_ property: Swift.String, expectedType: any Any.Type, printLog: Swift.Bool = true) -> Swift.Bool
+  open func isStringPropertySet(_ property: Swift.String) -> Swift.Bool
+  open func isFloatPropertySet(_ property: Swift.String) -> Swift.Bool
+  open func isColorPropertySet(_ property: Swift.String) -> Swift.Bool
+  #if compiler(>=5.3) && $NonescapableTypes
+  open func getColor(_ property: Swift.String) -> UIKit.UIColor?
+  #endif
+  open func getSize(_ property: Swift.String) -> CoreFoundation.CGSize
+  open func getUInteger(_ property: Swift.String) -> Swift.UInt
+  open func getFloat(_ property: Swift.String) -> CoreFoundation.CGFloat
+  #if compiler(>=5.3) && $NonescapableTypes
+  open func getURL(_ property: Swift.String) -> Foundation.URL?
+  #endif
+  open func getBool(_ property: Swift.String) -> Swift.Bool
+  open func getTextAlignment(_ property: Swift.String) -> UIKit.NSTextAlignment
+  #if compiler(>=5.3) && $NonescapableTypes
+  open func getString(_ property: Swift.String) -> Swift.String?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  open func getArray(_ property: Swift.String) -> [Any]?
+  #endif
+  open func getInsets(_ property: Swift.String) -> UIKit.UIEdgeInsets
+  @objc deinit
+}
+open class VTPUIStyleResolver {
+  public init(config: [Swift.String : Any])
+  #if compiler(>=5.3) && $NonescapableTypes
+  open func resolveStyle(_ viewType: Swift.String, withID viewID: Swift.String?, withClasses styleClasses: [Swift.String]) -> [Swift.String : Any]
+  #endif
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class VTPUIViewStyler : VizbeeTPlayKit.VTPBaseStyler {
+  #if compiler(>=5.3) && $NonescapableTypes
+  override open func style(_ view: UIKit.UIView, withID viewID: Swift.String?, withClasses styleClasses: [Swift.String])
+  #endif
+  required public init(config: [Swift.String : Any])
+  @objc deinit
+}
+public struct VTPAppMapper {
+  public static let defaultSupportedApps: [Swift.String : Swift.String]
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func getAppId(for appKey: Swift.String) -> Swift.String?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func getAppKey(for appId: Swift.String) -> Swift.String?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func getProvider(for appId: Swift.String) -> VizbeeTPlayKit.VTPVideoInfo.Provider?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func getAppId(for provider: VizbeeTPlayKit.VTPVideoInfo.Provider) -> Swift.String?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func getProvider(from deepLinkUrl: Swift.String) -> VizbeeTPlayKit.VTPVideoInfo.Provider?
+  #endif
+  public static func getProviderDisplayName(for provider: VizbeeTPlayKit.VTPVideoInfo.Provider) -> Swift.String
+}
+@objc @_hasMissingDesignatedInitializers public class VTPSessionStateHandler : ObjectiveC.NSObject, VizbeeKit.VZBSessionStateDelegate, VizbeeKit.VZBVideoStatusUpdateDelegate {
+  @objc public func onSessionStateChanged(_ newState: VizbeeKit.VZBSessionState)
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public func onVideoStatusUpdate(_ videoStatus: VizbeeKit.VZBVideoStatus!)
+  #endif
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class VizbeeTPlay : ObjectiveC.NSObject {
+  public var analyticsManager: VizbeeTPlayKit.VTPAnalyticsManager?
+  public static let shared: VizbeeTPlayKit.VizbeeTPlay
+  public static func initialize(appId: Swift.String, options: VizbeeTPlayKit.VTPOptions = VTPOptions())
+  public func startVideo(in viewController: UIKit.UIViewController, videoInfo: VizbeeTPlayKit.VTPVideoInfo) async -> VizbeeTPlayKit.VTPStartVideoResult
+  @objc deinit
+}
+extension VizbeeTPlayKit.VTPAnalyticsEvent.VideoState : Swift.Equatable {}
+extension VizbeeTPlayKit.VTPAnalyticsEvent.VideoState : Swift.Hashable {}
+extension VizbeeTPlayKit.VTPLogger.LogLevel : Swift.Hashable {}
+extension VizbeeTPlayKit.VTPLogger.LogLevel : Swift.RawRepresentable {}
+extension VizbeeTPlayKit.VTPLogger.Category : Swift.Equatable {}
+extension VizbeeTPlayKit.VTPLogger.Category : Swift.Hashable {}
+extension VizbeeTPlayKit.VTPLogger.Category : Swift.RawRepresentable {}
+extension VizbeeTPlayKit.VTPStartVideoResult.Destination : Swift.Equatable {}
+extension VizbeeTPlayKit.VTPStartVideoResult.Destination : Swift.Hashable {}
+extension VizbeeTPlayKit.VTPVideoInfo.Provider : Swift.Equatable {}
+extension VizbeeTPlayKit.VTPVideoInfo.Provider : Swift.Hashable {}
+extension VizbeeTPlayKit.VTPVideoInfo.Provider : Swift.RawRepresentable {}
+extension VizbeeTPlayKit.VTPDeviceSelectionCoordinator.Route : Swift.Equatable {}
+extension VizbeeTPlayKit.VTPDeviceSelectionCoordinator.Route : Swift.Hashable {}
+extension VizbeeTPlayKit.VTPCastButton.SwiftUIView : Swift.Sendable {}

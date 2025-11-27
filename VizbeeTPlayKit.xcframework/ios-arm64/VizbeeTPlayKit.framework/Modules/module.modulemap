@@ -1,0 +1,6 @@
+framework module VizbeeTPlayKit {
+  umbrella header "VizbeeTPlayKit.h"
+  export *
+
+  module * { export * }
+}
