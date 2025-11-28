@@ -22,7 +22,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		4f8I5rwnTh05Egtms4fVA1PWKYw=
+		Ygk2nhhzdSPRJQqKPb3YTbjT5hA=
 		</data>
 		<key>Modules/VizbeeTPlayKit.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
@@ -50,19 +50,35 @@
 		</data>
 		<key>README.md</key>
 		<data>
-		zYI4hEu6y6HOKdsb2lkrKjR7LeQ=
+		Ef+c41efSaMlPCXf2D5F03oVw2M=
+		</data>
+		<key>VizbeeTPlayKit.iml</key>
+		<data>
+		mAlXtXxPHq5ehdZk2Ddfg9R9Plo=
 		</data>
 		<key>build-xcframework.sh</key>
 		<data>
-		sTSYEnc/aUPHQu/e9Q4nr++6cxM=
+		iHXHDDCOCxpNWu8BtP5mJ9DzJA4=
+		</data>
+		<key>deviceStreaming.xml</key>
+		<data>
+		pcJbaFek3QyUhoblH0D0WESf+Rg=
 		</data>
 		<key>misc.xml</key>
 		<data>
-		iStGvK9YNoA+mRLCu+qMoDceIWY=
+		dbreqRVxiNeMYV4pyCReacXUE68=
+		</data>
+		<key>modules.xml</key>
+		<data>
+		/lDcBRVRlXqSl1GQEYb8t2IUl+Q=
+		</data>
+		<key>vcs.xml</key>
+		<data>
+		LZB6NgdePsyyPuGlqRiHrvtCXtE=
 		</data>
 		<key>workspace.xml</key>
 		<data>
-		a4qKnzpjxsKGbs0gh/PZSm/Ouco=
+		ipJtKc473OSD/vKu+c2T0L12D9I=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -141,28 +157,56 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			nh4Zgm6Sd/arXs+id34Bc1cag7+2MODzhUdGPzx9p+Y=
+			cZFRTcWCIsmMdH7kjL8xXgwGRSWbvAtbz0KF/ptVyFs=
+			</data>
+		</dict>
+		<key>VizbeeTPlayKit.iml</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			D/lLScYYhd15fj2mHcNETHq0jzFzc8pCaBkQ8fhBN1I=
 			</data>
 		</dict>
 		<key>build-xcframework.sh</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			D4QKbHKe/8tSCYB1TPXqUAqenDeq7+6f+5VxxthpzQ8=
+			uOWYulO77bsMEgDXOA2X5xPpOoGGuRvUhc1F9sHzYzY=
+			</data>
+		</dict>
+		<key>deviceStreaming.xml</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			zHa6KVwJimgT+vFudSa4So0MTN3guXiJHU7agmuCIwY=
 			</data>
 		</dict>
 		<key>misc.xml</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			M5oM+doHp29LIDmVeLBvAQAknP7q16pgwNOVEb9OjS8=
+			Z+7blyhSjciyWq/WU2kkCBlBxgt6W2+tJCYCBBOlPzQ=
+			</data>
+		</dict>
+		<key>modules.xml</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			9G7xDe0yMIrprTwM70ZGlpJqnZ7PrrKDEtnWH0cIbPs=
+			</data>
+		</dict>
+		<key>vcs.xml</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			b/39r807/tBAMOSSbIxyjQKeZsNYXTI+/FCT1j3FXuE=
 			</data>
 		</dict>
 		<key>workspace.xml</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			RAt8XR73y4gzQsnXNJhMy41qBR7Uj2zryGy/K9P9IFo=
+			qwmaj7rDf5c5Hrvbi98jcHlVD5JlhOkT/oPHQaxct1I=
 			</data>
 		</dict>
 	</dict>

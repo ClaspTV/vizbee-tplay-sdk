@@ -1,287 +1,60 @@
-# VizbeeTPlay iOS SDK
+# VizbeeTPlayKit Developer Guide
 
-A Swift wrapper SDK for Vizbee Continuity SDK that enables seamless video casting from mobile to TV devices.
+This guide is for developers who are maintaining and publishing the `VizbeeTPlayKit` framework. For instructions on how to *use* the framework in an application, please refer to the README in the consumer-facing repository: [https://github.com/ClaspTV/vizbee-tplay-sdk](https://github.com/ClaspTV/vizbee-tplay-sdk).
 
-## Requirements
+## Overview
 
-- iOS 13.0+
-- Xcode 14.0+
-- Swift 5.9+
+`VizbeeTPlayKit` is a wrapper framework built on top of the Vizbee Continuity SDK. This project contains the source code and build scripts necessary to produce the distributable `TPlaySDK.xcframework`.
 
-## Installation
+This wrapper provides several key features tailored for aggregator apps like T-Play:
 
-### Swift Package Manager
+*   **Custom UI Components**: Includes customized device selection cards designed specifically for the T-Play application.
+*   **Simplified Cast Button**: Offers a `VTPCastButton` that wraps the standard Vizbee cast button, simplifying its integration.
+*   **Simplified Video API**: Provides a high-level API to start video playback.
+*   **Multi-App Support**: Supports starting and stopping the underlying Vizbee SDK, allowing it to coexist with other Vizbee-enabled apps within an aggregator application.
 
-Add the following to your `Package.swift` or add via Xcode:
+## Building the Framework
 
-```swift
-dependencies: [
-    .package(url: "https://github.com/your-org/VizbeeTPlay-iOS.git", .upToNextMajor(from: "1.0.0"))
-]
+The framework is built and archived using a shell script.
+
+To build a new version of the framework, run the following command from the project root:
+
+```bash
+./build-xcframework.sh
 ```
 
-## Setup
+Upon successful execution, the script will archive the framework and place the output `TPlaySDK.xcframework` into a `dist` folder located one level above the project directory (`../dist`).
 
-### 1. Initialize the SDK
+## Publishing a New Version
 
-Initialize the SDK once at app startup (typically in `AppDelegate` or `App` struct):
+Publishing a new version of the framework is a manual process. Follow these steps carefully:
 
-```swift
-import VizbeeTPlay
+1.  **Build the Framework**: Run the `./build-xcframework.sh` script as described above.
 
-@main
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    func application(
-        _ application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
-    ) -> Bool {
-        
-        // Initialize VizbeeTPlay SDK
-        VizbeeTPlay.initialize(
-            appId: "vzb2379701350",
-            options: VizbeeTPlayOptions(debugMode: true)
-        )
-        
-        return true
-    }
-}
-```
+2.  **Locate the Artifact**: Navigate to the `dist` directory (one level up from this project's root) and verify that the new `TPlaySDK.xcframework` has been created.
 
-### 2. Add Cast Button
+3.  **Clone the Distribution Repository**: If you haven't already, clone the `vizbee-tplay-sdk` repository to your local machine:
+    ```bash
+    git clone https://github.com/ClaspTV/vizbee-tplay-sdk.git
+    ```
 
-#### UIKit - Programmatically
+4.  **Copy the Framework**: Manually copy the `TPlaySDK.xcframework` from the `dist` folder into the root of your local `vizbee-tplay-sdk` repository clone, replacing the existing framework.
 
-```swift
-import VizbeeTPlay
+5.  **Commit and Push**: In the `vizbee-tplay-sdk` repository, commit the new framework and push the changes:
+    ```bash
+    # Navigate into the repository directory
+    cd vizbee-tplay-sdk
 
-class MyViewController: UIViewController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let castButton = CastButton()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: castButton)
-    }
-}
-```
+    # Add, commit, and push the new framework
+    git add .
+    git commit -m "feat: Update framework to version X.Y.Z" # Use a descriptive commit message
+    git push
+    ```
 
-#### UIKit - Storyboard/XIB
+6.  **Tag the Release**: Create a new tag that matches the version number and push it to the repository. This is crucial for Swift Package Manager to pick up the new version.
+    ```bash
+    git tag vX.Y.Z # e.g., v1.0.1
+    git push origin vX.Y.Z
+    ```
 
-1. Add a `UIButton` to your view
-2. Set the custom class to `CastButton` in Identity Inspector
-3. The button will automatically manage its state
-
-#### SwiftUI
-
-```swift
-import SwiftUI
-import VizbeeTPlay
-
-struct ContentView: View {
-    var body: some View {
-        NavigationView {
-            // Your content
-            Text("Hello, World!")
-                .navigationBarItems(trailing: CastButtonRepresentable())
-        }
-    }
-}
-
-struct CastButtonRepresentable: UIViewRepresentable {
-    func makeUIView(context: Context) -> CastButton {
-        return CastButton()
-    }
-    
-    func updateUIView(_ uiView: CastButton, context: Context) {
-        // No updates needed
-    }
-}
-```
-
-### 3. Start Video Playback
-
-When a user wants to watch content, call `startVideo`:
-
-```swift
-import VizbeeTPlay
-
-func playVideo() {
-    let videoInfo = TPlayVideoInfo(
-        mobileDeepLinkUrl: "myapp://watch/123",
-        tvDeepLinkUrl: "plex://video/123",
-        title: "My Amazing Video",
-        subtitle: "Episode 1",
-        imageUrl: "https://example.com/thumbnail.jpg",
-        isLive: false,
-        provider: .plex
-    )
-    
-    Task {
-        let result = await VizbeeTPlay.shared.startVideo(
-            in: self,
-            videoInfo: videoInfo
-        )
-        
-        switch result {
-        case .success(let destination):
-            switch destination {
-            case .tv:
-                print("Video will play on TV")
-            case .mobile:
-                print("Video will play on mobile")
-            }
-            
-        case .failure(let error):
-            switch error {
-            case .deviceSelectionCancelled:
-                // User dismissed device selection - no action needed
-                break
-                
-            case .deviceConnectionCancelled:
-                // User cancelled connection - no action needed
-                break
-                
-            case .deviceConnectionError(_, let reason):
-                // Show error to user
-                showError(message: "Failed to connect: \(reason)")
-                
-            case .unknownError(let message):
-                // Show error to user
-                showError(message: message)
-            }
-        }
-    }
-}
-```
-
-## Video Info Configuration
-
-### TPlayVideoInfo
-
-```swift
-public struct TPlayVideoInfo {
-    /// Unique identifier (optional, will be auto-generated from TV deep link)
-    public var id: String
-    
-    /// Deep link URL for mobile app playback
-    public let mobileDeepLinkUrl: String
-    
-    /// Deep link URL for TV app playback
-    public let tvDeepLinkUrl: String
-    
-    /// Title of the content
-    public let title: String
-    
-    /// Optional subtitle/description
-    public let subtitle: String?
-    
-    /// Optional thumbnail URL
-    public let imageUrl: String?
-    
-    /// Whether this is live content
-    public let isLive: Bool
-    
-    /// Content provider
-    public var provider: Provider?
-}
-```
-
-### Supported Providers
-
-```swift
-public enum Provider {
-    case plex
-    case tbs
-    case tnt
-}
-```
-
-## Analytics
-
-To track analytics events, implement the `VizbeeTPlayAnalyticsListener` protocol:
-
-```swift
-import VizbeeTPlay
-
-class MyAnalytics: VizbeeTPlayAnalyticsListener {
-    
-    init() {
-        VizbeeTPlayAnalyticsManager.shared.addListener(self)
-    }
-    
-    func onEvent(_ event: VizbeeTPlayAnalyticsEvent) {
-        switch event {
-        case .deviceSelectionShown(let devices):
-            print("Device selection shown with \(devices.count) devices")
-            
-        case .tvSelected(let device):
-            print("User selected TV: \(device.friendlyName)")
-            
-        case .mobileSelected:
-            print("User selected mobile playback")
-            
-        case .tvConnected(let device):
-            print("Connected to TV: \(device.friendlyName)")
-            
-        // Handle other events...
-        default:
-            break
-        }
-    }
-}
-```
-
-## Customization
-
-### Debug Mode
-
-Enable debug logging:
-
-```swift
-VizbeeTPlay.initialize(
-    appId: "your_app_id",
-    options: VizbeeTPlayOptions(debugMode: true)
-)
-```
-
-### Supported Apps
-
-Configure which apps are supported:
-
-```swift
-let options = VizbeeTPlayOptions(
-    debugMode: true,
-    supportedApps: [
-        "plex": "vzb6537171225",
-        "tbs": "vzb9390280478"
-    ]
-)
-
-VizbeeTPlay.initialize(appId: "your_app_id", options: options)
-```
-
-## Troubleshooting
-
-### Cast Button Not Showing
-
-- Ensure SDK is initialized before creating CastButton
-- Check that devices are on the same network
-- Enable debug mode to see detailed logs
-
-### Connection Failures
-
-- Verify network connectivity
-- Ensure TV apps are installed on target devices
-- Check that deep link URLs are correctly formatted
-
-### Deep Link Format
-
-For Plex:
-```
-plex://play?guid=<guid>&server=<server_id>
-```
-
-## License
-
-Copyright © 2024 Vizbee. All rights reserved.
+Once these steps are complete, the new version of the framework will be available for consumption.

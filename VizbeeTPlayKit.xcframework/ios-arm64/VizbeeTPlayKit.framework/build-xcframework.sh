@@ -2,8 +2,7 @@
 #  build.sh
 #  VizbeeKit
 #
-#  Created by Sidharth Datta on 30/01/24.
-#  Copyright © 2024 Vizbee. All rights reserved.
+#  Copyright © 2025 Vizbee. All rights reserved.
 #
 
 #!/bin/bash
@@ -20,10 +19,10 @@ SPM_REPO_PATH="../../../vizbee-tplay-sdk"
 update_plist_files() {
     # Update semantic version string
     /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $SEMANTIC_VERSION" $INFO_PLIST_PATH
-    /usr/libexec/PlistBuddy -c "Set :VZBBundleShortVersionString $SEMANTIC_VERSION" $INFO_PLIST_PATH
+    /usr/libexec/PlistBuddy -c "Set :VTPBundleShortVersionString $SEMANTIC_VERSION" $INFO_PLIST_PATH
     # Update bundle version string
     /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUNDLE_VERSION" $INFO_PLIST_PATH
-    /usr/libexec/PlistBuddy -c "Set :VZBBundleVersion $BUNDLE_VERSION" $INFO_PLIST_PATH
+    /usr/libexec/PlistBuddy -c "Set :VTPBundleVersion $BUNDLE_VERSION" $INFO_PLIST_PATH
     # Stage Info.plist for VCS convenience
     git add $INFO_PLIST_PATH
 }
@@ -73,7 +72,7 @@ create_xcframework() {
 # Function to update files (spm, cocoapod, carthage, etc.)
 copy_to_spm() {
     # Copy to spm folder
-    echo "Updating VizbeeHomeSSOKit SPM xcframework..."
+    echo "Updating VizbeeTPlayKit SPM xcframework..."
     mkdir -p $OUTPUT_PATH/SPM
     cp -r "$OUTPUT_PATH/$TARGET_NAME.xcframework" "$OUTPUT_PATH/SPM"
 }
