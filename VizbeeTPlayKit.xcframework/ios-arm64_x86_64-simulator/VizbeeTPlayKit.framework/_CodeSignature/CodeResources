@@ -10,11 +10,11 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		XtQg+XF+w4Cc4XNVmDiKVySnCr0=
+		x6TdRbUkCm7IcNXLDMuA7y3D5Yo=
 		</data>
 		<key>ChangeLog.md</key>
 		<data>
-		yI52aZmotQJwWHP6IYP674ep7O8=
+		mYvDV17XOwviNVGK/SVYnqj7CRQ=
 		</data>
 		<key>Headers/VizbeeTPlayKit.h</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		7gKNNz3lhvCg38XzQecydFhy0Qw=
+		VF4gu9waUqQtwmLnzY3xLwy8tYg=
 		</data>
 		<key>Modules/VizbeeTPlayKit.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -30,19 +30,19 @@
 		</data>
 		<key>Modules/VizbeeTPlayKit.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		ec9Ng3ZEZNKbk5TNQY/pTFTMvaM=
+		XH88Frck6p5Qxd2BvSGk22Bm3Rg=
 		</data>
 		<key>Modules/VizbeeTPlayKit.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		N10hq+ERVfxR4DQYKEodIDI47XY=
+		s4tdZEdHrJTIlh6JeOVMdvkLJ2A=
 		</data>
 		<key>Modules/VizbeeTPlayKit.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		ec9Ng3ZEZNKbk5TNQY/pTFTMvaM=
+		XH88Frck6p5Qxd2BvSGk22Bm3Rg=
 		</data>
 		<key>Modules/VizbeeTPlayKit.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		KzonNXGhZAzrrqSU2PyuuGjJ0s8=
+		tIG7RJQvDIt3HrzQO1I9htt1z5Q=
 		</data>
 		<key>Modules/VizbeeTPlayKit.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -50,19 +50,19 @@
 		</data>
 		<key>Modules/VizbeeTPlayKit.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		yurG9G+DkGmkBeWJM+Io1+LOkKA=
+		yp/KZbgAzp/ISlwNPBoR8pnjAD8=
 		</data>
 		<key>Modules/VizbeeTPlayKit.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		jHHtDr8ngAAusYefLwganWmT5QE=
+		nlY5YEoDY7bUQftzBhz17kZzQlQ=
 		</data>
 		<key>Modules/VizbeeTPlayKit.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		yurG9G+DkGmkBeWJM+Io1+LOkKA=
+		yp/KZbgAzp/ISlwNPBoR8pnjAD8=
 		</data>
 		<key>Modules/VizbeeTPlayKit.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		nFSEVwz1Jx6LD8SgyfbO8v07qdU=
+		L/rp/X5iJYMC51gbdvslzvKtEvs=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -114,14 +114,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZprDW5EXMcW2hNJdXl5DZNjbbkDgypbPQg4xisOPseA=
+			CAxmZG1teCQnETJFyh3nR0DkcQEy+MwDaZIdslnsHRw=
 			</data>
 		</dict>
 		<key>ChangeLog.md</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			P9Iwk81EIw43UNQklaya/y+eNje8oGWsG8pk9dArez0=
+			UYmQ5uRGv/bTPfM3s/pZjMn8HOyK8c+kAaqSlGlQGCE=
 			</data>
 		</dict>
 		<key>Headers/VizbeeTPlayKit.h</key>
@@ -142,28 +142,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			e6q4s4TrK6KjLtLLzzAdPzAMIW7pjFJPsHt5OYm4d6A=
+			/CIjsh/Di9GTkxqjoZk5QQyr9QKpr5RpKcCPAyQGPAc=
 			</data>
 		</dict>
 		<key>Modules/VizbeeTPlayKit.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Fk0NfBLcyqF3fcj7nQVE2NK9mbzINN95iJUnJJ/RnEk=
+			4g9Tb1Rrx0IY+DKQVCiGbz1Qz9cEOrDylzB+6YD3Pw4=
 			</data>
 		</dict>
 		<key>Modules/VizbeeTPlayKit.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			e6q4s4TrK6KjLtLLzzAdPzAMIW7pjFJPsHt5OYm4d6A=
+			/CIjsh/Di9GTkxqjoZk5QQyr9QKpr5RpKcCPAyQGPAc=
 			</data>
 		</dict>
 		<key>Modules/VizbeeTPlayKit.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			8BosyhpO+AztxGxeam9o/xL6EAo6npzL3GRgYoA6vnw=
+			DKPAZ82a9uwZfWnSlY6O8THQTMxrDVpUydORUvCLLiw=
 			</data>
 		</dict>
 		<key>Modules/VizbeeTPlayKit.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
@@ -177,28 +177,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			PiE2LTc7Db8/pbWskv+bICZEI8CMvUMJgT3BATjjQHI=
+			2A9VrVI38LlynZPXwlpnfI0YdntqFNf3kGb+7YvC4Xc=
 			</data>
 		</dict>
 		<key>Modules/VizbeeTPlayKit.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			PnQMIF6c5sO9NBgkGFqD4MMFBwmtRSqJ9z17fko1a+Q=
+			m6wbL+Jv6+ZnQ6GkEKAWhZiqPlcaxpuwfiPvLGmbW1c=
 			</data>
 		</dict>
 		<key>Modules/VizbeeTPlayKit.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			PiE2LTc7Db8/pbWskv+bICZEI8CMvUMJgT3BATjjQHI=
+			2A9VrVI38LlynZPXwlpnfI0YdntqFNf3kGb+7YvC4Xc=
 			</data>
 		</dict>
 		<key>Modules/VizbeeTPlayKit.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			gY8aSeHJWMbFf0jALOJoORFil6/Q9hu2GxhSKcyOs4c=
+			06x/0VsgDtS40pUyQRANE9HH5fwp4bM3VGNyY9mZ+Eo=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
