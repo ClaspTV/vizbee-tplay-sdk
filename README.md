@@ -71,7 +71,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         let vizbeeAppId = "YOUR_VIZBEE_APP_ID" // Replace with T-Play\'s actual Vizbee App ID
         VizbeeTPlay.init(appId: vizbeeAppId)
-        
+
+        // Pass the T-Mobile subscriber ID at the earliest possible point in the app lifecycle, whenever it becomes available.”
+        Vizbee.addCustomEventAttributes(["TMobile_SubscriberId": "<TMobile_SubscriberId>"])
+
         return true
     }
 }
